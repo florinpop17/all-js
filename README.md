@@ -1,2 +1,2 @@
-# all-js
-Everything you even need in JavaScript
+# All JavaScript
+A list of Algorithms and Coding Challenges built with JavaScript.
