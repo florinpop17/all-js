@@ -6,4 +6,6 @@ function sumOfMultiples() {
             sum += i;
         }
     }
+
+    return sum;
 }
