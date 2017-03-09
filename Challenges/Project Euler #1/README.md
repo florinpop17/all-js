@@ -7,5 +7,5 @@ The sum of these multiples is 23.
 # Source
 [Project Euler](https:www.projecteuler.net)
 
-Read more about the **first solution** on [medium](https://medium.com/@popflorin1705/javascript-coding-challenge-1-6d9c712963d2).
-Read more about the **second solution** on [medium](https://medium.com/@popflorin1705/javascript-coding-challenge-1-follow-up-278dcc1e25c7).
+1. Read more about the **first solution** on [medium](https://medium.com/@popflorin1705/javascript-coding-challenge-1-6d9c712963d2).
+2. Read more about the **second solution** on [medium](https://medium.com/@popflorin1705/javascript-coding-challenge-1-follow-up-278dcc1e25c7).
