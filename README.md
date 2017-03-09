@@ -1,4 +1,4 @@
-# All JavaScript
-A list of Algorithms and Coding Challenges built with JavaScript.
+# All JS
+All JS is list of Algorithms and Coding Challenges built using JavaScript.
 
-You can find in each folder a README file that contains more informations about the subject.
+You can find more details about each subject in their folder.
