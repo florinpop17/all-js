@@ -5,7 +5,7 @@ The sum of these multiples is 23.
 >Find the sum of all the multiples of 3 or 5 below 1000.
 
 # Source
-[Project Euler](https:www.projecteuler.net)
+[Project Euler](https://www.projecteuler.net)
 
 1. Read more about the **first solution** on [medium](https://medium.com/@popflorin1705/javascript-coding-challenge-1-6d9c712963d2).
 2. Read more about the **second solution** on [medium](https://medium.com/@popflorin1705/javascript-coding-challenge-1-follow-up-278dcc1e25c7).
