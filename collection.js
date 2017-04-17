@@ -1,4 +1,448 @@
 
+
+
+
+
+
+
+
+// Given an array of integers, find the rightmost round number in it and output its position in the array (0-based).
+// If there are no round numbers in the given array, output -1.
+function rightmostRoundNumber(inputArray) {
+    for(var i=inputArray.length-1; i>=0; i--){
+        if(inputArray[i] % 10 === 0) return i;
+    }
+    return -1;
+}
+
+// Given an array of integers, find the pair of adjacent elements that has the largest product and return that product.
+function adjacentElementsProduct(inputArray) {
+    var max = -9999999;
+    for(var i=0; i<inputArray.length-1; i++){
+        var curr = inputArray[i] * inputArray[i+1];
+        if(curr > max) max = curr;
+    }
+    return max;
+}
+
+// Given a set of complex values, find their product.
+function arrayComplexElementsProduct(real, imag) {
+    var x = [real[0], imag[0]];
+    for(var i=1; i<real.length; i++){
+        var temp = x;
+        x = [x[0] * real[i] - x[1] * imag[i], x[0] * imag[i] + x[1] * real[i]];
+    }
+    return x;
+}
+
+// Given a square matrix, your task is to reverse the order of elements on both of its longest diagonals.
+function reverseOnDiagonals(matrix) {
+    for(var i=0; i<matrix.length; i++){
+        for(var j=0; j<matrix.length / 2; j++){
+            if(i === j){
+                var temp = matrix[i][j];
+                matrix[i][j] = matrix[matrix.length - i - 1][matrix.length - i - 1];
+                matrix[matrix.length - i - 1][matrix.length - i - 1] = temp;
+            }
+            if(i + j === matrix.length - 1){
+                var temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
+
+    return matrix;
+}
+
+// Given an integer, check if it is an increasing digits sequence.
+function isIncreasingDigitsSequence(n) {
+    n = n.toString().split('').map(Number);
+    for(var i=0; i<n.length -1; i++){
+        if(n[i+1] <= n[i]) return false;
+    }
+    return true;
+}
+
+// Perfect array is an array in which each element is equal to the length of this array. Check if a given array is perfect.
+function perfectArray(A) {
+    var len = A.length;
+    return A.every(i => i===len);
+}
+
+// Digits from Math.abs(a[i+1] - a[i])
+function digitDistanceNumber(n) {
+    var res = [];
+    n = n.toString().split('').map(Number);
+    for(var i=0; i<n.length-1; i++){
+        res.push(Math.abs(n[i+1] - n[i]));
+    }
+    return parseInt(res.join(''), 10);
+}
+
+// NAND operation
+function shefferStroke(a, b) {
+    return !a || !b;
+}
+
+// Given a string, find out if its characters can be rearranged to form a palindrome.
+function palindromeRearranging(inputString) {
+    var count = {};
+    inputString.split('').forEach(cr => {
+        count[cr] = (count[cr] || 0) + 1;
+    })
+
+    var numberOfOdds = 0;
+    for(key in count){
+        if(count[key] % 2 === 1) numberOfOdds++;
+    }
+
+    return numberOfOdds < 2;
+}
+
+// Given an integer n, find the value of phi(n), where phi is Euler's totient function
+function eulersTotientFunction(n) {
+
+    // Greatest common divisor
+    gcd = (a,b) => {
+        if(!a) return b;
+        return gcd(b%a, a);
+    }
+
+    var count = 0;
+    for(var i=1; i<=n; i++){
+        if(gcd(i, n) === 1) count++;
+    }
+    return count;
+}
+
+// Cool strings
+// Let's call a string cool if it is formed only by Latin letters and no
+// two lowercase and no two uppercase letters are in adjacent positions. Given a string, check if it is cool.
+function coolString(inputString) {
+    isLower = (c) => {
+        return c === c.toLowerCase();
+    }
+
+    isUpper = (c) => {
+        return c === c.toUpperCase();
+    }
+
+    if(/[\W\d]/.test(inputString)) return false;
+    for(var i=0; i<inputString.length - 1; i++){
+        var curr = inputString[i];
+        var next = inputString[i+1];
+        if(isLower(curr) && isLower(next) || isUpper(curr) && isUpper(next)) return false;
+    }
+    return true;
+}
+
+// Lucky numbers are the positive integers whose decimal representations contain only the lucky digits 4 and 7.
+function isLuckyNumber(n) {
+    return n.toString().split('').every(i => i==='4' || i==='7');
+}
+
+// Determine if a number is prime
+isPrime = (n) => {
+    for(var i=2; i<n; i++){
+        if(n % i === 0) return false;
+    }
+    return true;
+}
+
+// Given a ciphered string, return the initial one if it is known that it consists only of lowercase letters.
+function decipher(cipher) {
+    var len = 1;
+    var i = 0;
+    var res = [];
+    cipher = cipher.split('');
+    while(cipher.length > 0){
+        var curr = '';
+        while(curr < 97){
+            len++;
+            curr = parseInt(cipher.slice(0, len).join(''),10);
+        }
+        cipher.splice(0, len);
+        len = 0;
+        res.push(String.fromCharCode(curr));
+    }
+    return res.join('');
+}
+
+// Two arrays are called similar if one can be obtained from another
+// by swapping at most one pair of elements in one of the arrays.
+function areSimilar(A, B) {
+    var pairs = 0;
+    var falseA = [];
+    var falseB = [];
+    for(var i=0; i<A.length; i++){
+        if(A[i] !== B[i]){
+            pairs++;
+            falseA.push(A[i]);
+            falseB.push(B[i]);
+        }
+        if(pairs > 2) return false;
+    }
+    return falseA.sort((a,b) => a-b).join('') === falseB.sort((a,b) => a-b).join('');
+}
+
+// Given a positive integer number and a certain length, we need to modify the given number to have a specified length.
+// We are allowed to do that either by cutting out leading digits
+// (if the number needs to be shortened) or by adding 0s in front of the original number.
+function integerToStringOfFixedWidth(number, width) {
+    number = '00000' + number;
+    return number.substr(-width);
+}
+
+// Election winner votes
+function electionsWinners(votes, k) {
+    var max = Math.max(...votes);
+    var count = 0;
+    votes.forEach(vote => {
+        if(vote + k > max) count++;
+    });
+    return k === 0 ? votes.indexOf(max) === votes.lastIndexOf(max) ? 1 : 0 : count;
+}
+
+// Timed reading. Boy reading box if word length is less than or equal to maxLenght
+function timedReading(maxLength, text) {
+    var res = text.match(/[a-zA-Z]+/g);
+    return res === null ? 0 : res.filter(i => i.length <= maxLength).length;
+}
+
+// Switch lights if candle is lit
+function switchLights(a) {
+    a = a.map(i => i===1);
+    for(var i=0; i<a.length; i++){
+        if(a[i]){
+            for(var j=0; j<=i; j++){
+                a[j] = !a[j];
+            }
+        }
+    }
+    return a.map(i => i ? 1 : 0);
+
+    // OR
+    for(var i=0; i<a.length; i++){
+        if(a[i]){
+            for(var j=0; j<=i; j++){
+                a[j] = a[j] === 1 ? 0 : 1;
+            }
+        }
+    }
+    return a;
+}
+
+// Add border of * to a given array of strings
+function addBorder(picture) {
+    return [
+        new Array(picture[0].length + 2).fill('*').join(''),
+        ...picture.map(img => '*'+img+'*'),
+        new Array(picture[0].length + 2).fill('*').join('')
+    ]
+}
+
+// Banana land buying bananas with coins
+function minimalNumberOfCoins(coins, price) {
+    var count = 0;
+    var i = coins.length - 1;
+    while(price > 0 && i > -1){
+        if(price - coins[i] >= 0) {
+            price -= coins[i];
+            count++;
+        } else {
+            i--;
+        }
+        console.log(price, coins[i])
+    }
+    return count;
+}
+
+// Check whether the given string is a subsequence of the plaintext alphabet.
+function alphabetSubsequence(s) {
+    for(var i=0; i<s.length - 1; i++){
+        if(s.charCodeAt(i) >= s.charCodeAt(i+1)) return false;
+    }
+    return true;
+}
+
+
+
+// There are some people and cats in a house. You are given the number of legs they have all together.
+// Your task is to return an array containing every possible number of people that could be in the house sorted in ascending order.
+function houseOfCats(legs) {
+    var res = [];
+    var subtract = 0;
+    while(subtract <= legs){
+        res.push((legs - subtract) / 2);
+        subtract += 4;
+    }
+    return res.reverse();
+}
+
+// Given an array of strings, return another array containing all of its longest strings.
+function allLongestStrings(inputArray) {
+    var max = Math.max(...inputArray.map(i => i.length));
+    return inputArray.filter(i => i.length === max);
+}
+
+// Boy walking counting house numbers
+function houseNumbersSum(inputArray) {
+    var i=0, sum=0;
+
+    while(inputArray[i] !== 0){
+        sum += inputArray[i];
+        i++;
+    }
+
+    return sum;
+}
+
+// How many strings equal to A can be constructed using letters from the string B?
+// Each letter can be used only once and in one string only.
+function stringsConstruction(A, B) {
+    B = B.split('').sort();
+    A = A.split('').sort();
+    var times = Math.floor(B.length / A.length);
+    var full = 0;
+
+    for(var q=0; q<times; q++){
+        var count = 0;
+
+        for(var i=0; i<A.length; i++){
+            if(B.indexOf(A[i]) > -1){
+                count++;
+
+                B.splice(B.indexOf(A[i]), 1);
+            } else {
+                break;
+            }
+        }
+
+        if(count === A.length){
+            full++;
+        }
+    }
+
+    return full;
+}
+
+// Valid MAC48 address
+function isMAC48Address(inputString) {
+    var res = inputString.split('-')
+
+    return res.length === 6 && res.every(part => /^[0-9A-F]{2}$/.test(part));
+}
+
+// Given a sequence of non-negative integers, find its median.
+function arrayMedian(sequence) {
+    sequence.sort((a,b) => a-b);
+
+    if(sequence.length % 2 === 0){
+        return (sequence[sequence.length / 2] +sequence[sequence.length / 2 - 1]) / 2
+    }
+
+    return sequence[Math.floor(sequence.length / 2)]
+}
+
+// Given an array of integers, find the maximal absolute difference between any two of its adjacent elements.
+function arrayMaximalAdjacentDifference(inputArray) {
+    var max = 0;
+    for(var i=0; i<inputArray.length-1; i++){
+        var dif = Math.abs(inputArray[i+1] - inputArray[i]);
+        if(dif > max) max = dif;
+    }
+
+    return max;
+}
+
+// Replace each digits with #
+function replaceAllDigitsRegExp(input) {
+    return input.replace(/[0-9]/g,'#');
+}
+
+// Number of even digits of an integer
+function numberOfEvenDigits(n) {
+    return n.toString().split('').map(Number).filter(i => i%2==0).length;
+}
+
+// Coffee at a vending machine
+function coffeeVendingMachine(number){
+    var coffee = ['French Roast', 'Colombian', 'Kona'];
+    return cofee(number-1);
+}
+
+// Tennis game scores
+function tennisSet(score1, score2) {
+    if(score1 === 6 && score2 < 5 || score2 === 6 && score1 < 5) return true;
+    if(score1 === 7 && (score2 === 6 || score2 === 5)) return true;
+    if(score2 === 7 && (score1 === 6 || score1 === 5)) return true;
+    return false
+}
+
+// Special numbers from l to r
+function specialNumbers(l, r) {
+    var count = 0;
+    for(var i=l; i<=r; i++){
+        if(specialNumber(i)) count++;
+    }
+    return count;
+}
+
+// A number is considered special, if it remains the same (and continues being a valid number) when rotated by 180°.
+isSpecial = (n) => {
+    var arr = n.toString().split('').filter(i => i!= '');
+    for(var i=0; i<arr.length / 2; i++){
+        if(arr[i] === '9' || arr[i] === '8' || arr[i] === '6' || arr[i] === '0'){
+            if(arr[i] === '9' && arr[arr.length-i-1] !== '6') return false;
+            if(arr[i] === '6' && arr[arr.length-i-1] !== '9') return false;
+            if(arr[i] === '8' && arr[arr.length-i-1] !== '8') return false;
+            if(arr[i] === '0' && arr[arr.length-i-1] !== '0') return false;
+        } else {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+// Correct variable name using regex
+function variableName(name) {
+    return name.match(/^[a-zA-Z_]+[a-zA-Z0-9_]*/) === null ? false : name.match(/^[a-zA-Z_]+[a-zA-Z0-9_]*/)[0].length === name.length;
+}
+
+// Given an array of integers, find the number of inversions it contains.
+function countInversionsNaive(inputArray) {
+    var count = 0
+    for(var i=0; i<inputArray.length; i++){
+        for(var j=i+1; j<inputArray.length; j++){
+            if(inputArray[i] > inputArray[j]) count++;
+        }
+    }
+
+    return count;
+}
+
+// Mixed fraction from reduced improper fraction
+function improperFractionToMixed(a) {
+    return [Math.floor(a[0] / a[1]), a[0] % a[1], a[1]];
+}
+
+
+// Magical well, marble a, b
+function magicalWell(a, b, n) {
+    var sum = 0;
+    var i = 0;
+    while(i < n){
+        sum += a * b;
+        a++;
+        b++;
+        i++;
+    }
+
+    return sum;
+}
+
 // Decipher Mad Coder evil genius. Check bit if it is 1 and change to 0
 function killKthBit(n, k) {
     n = n.toString(2).split('').reverse();
