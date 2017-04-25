@@ -1,10 +1,94 @@
+// Below we will define an n-interesting polygon. Your task is to find the area of a polygon for a given n.
+function shapeArea(n) {
+   if(n === 1) return 1;
+   return 4 * (n-1) + shapeArea(n-1);
+}
 
+// Pick-out the largest even number from an array of integers
+function maximalEven(inputArray) {
+    var max = -9999999;
+    for(var i=0; i<inputArray.length; i++){
+        if(inputArray[i] % 2 === 0 && inputArray[i] > max) max = inputArray[i];
+    }
+    return max;
+}
 
+// Is palindrome
+function checkPalindrome(inputString) {
+    for(var i=0; i < inputString.length/2; i++){
+        if(inputString[i] !== inputString[inputString.length - i - 1]) return false;
+    }
 
+    return true;
+}
 
+// Century from year
+function centuryFromYear(year) {
+    return Math.floor((year-1) / 100)+1;
+}
 
+// Given a decimal integer n, find an integer k ≥ 2 such that the representation of n in base k
+// has the maximum possible number of zeros. If there are several answers, output the smallest one.
+function maxZeros(n) {
+    var base = 2;
+    var maxZeros = 0;
+    var result = 2;
+    while(base < 16){
+        var x = n.toString(base);
+        var zeroes = x.split('').filter(i => i==='0').length;
+        if(zeroes > maxZeros){
+            maxZeros = zeroes;
+            result = base;
+        }
+        base++;
+    }
+    return result;
+}
 
+// xor
+var res = a;
+for(var i=a+1; i<=b; i++){
+    res ^= i;
+}
+return res;
 
+// Array packing of bits
+function arrayPacking(a) {
+    var res = [];
+    for(var i=0; i<a.length; i++)
+        res[i] = ('00000000'+a[i].toString(2)).substr(-8);
+    return parseInt(res.reverse().join(''), 2);
+}
+
+// Sum of factors until n is different
+function factorSum(n) {
+    allPrimes = (n) => {
+        var arr = [];
+        var div = 2;
+        while(n !== 1){
+            while(n % div === 0){
+                arr.push(div);
+                n /= div;
+            }
+            div++
+        }
+        return arr;
+    }
+
+    isPrime = (n) => {
+        for(var i=2; i<n; i++){
+            if(n % i === 0) return false;
+        }
+        return true;
+    }
+
+    var last = 0;
+    while(!isPrime(n) && last!==n){
+        last = n;
+        n = allPrimes(n).reduce((acc, item) => acc+=item, 0);
+    }
+    return n;
+}
 
 // Given an array of integers, find the rightmost round number in it and output its position in the array (0-based).
 // If there are no round numbers in the given array, output -1.
